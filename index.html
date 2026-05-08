@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            line-height: 1.6;
+        }
+
+        /* Estructura semántica */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        main {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Tarjeta del formulario */
+        .formulario-tarjeta {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .perfil-imagen {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .perfil-imagen img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #3498db;
+        }
+
+        .grupo-formulario {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select, datalist {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        input[type="color"] {
+            height: 50px;
+            padding: 0.2rem;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        button {
+            width: 100%;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Responsive para celular */
+        @media (max-width: 480px) {
+            main {
+                margin: 1rem auto;
+            }
+            
+            .formulario-tarjeta {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Estructura semántica: Header -->
+    <header>
+        <h1>Registro de Usuario</h1>
+    </header>
+
+    <!-- Estructura semántica: Main -->
+    <main>
+        <div class="formulario-tarjeta">
+            <!-- Imagen de perfil -->
+            <div class="perfil-imagen">
+                <img src="https://via.placeholder.com/150" alt="Imagen de perfil">
+            </div>
+
+            <form id="formRegistro">
+                <!-- Nombre -->
+                <div class="grupo-formulario">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+
+                <!-- Correo -->
+                <div class="grupo-formulario">
+                    <label for="correo">Correo electrónico:</label>
+                    <input type="email" id="correo" name="correo" required>
+                </div>
+
+                <!-- Contraseña con validación -->
+                <div class="grupo-formulario">
+                    <label for="contrasena">Contraseña (mínimo 8 caracteres):</label>
+                    <input type="password" id="contrasena" name="contrasena" required>
+                    <div class="error" id="errorContrasena">La contraseña debe tener al menos 8 caracteres</div>
+                </div>
+
+                <!-- Fecha de nacimiento -->
+                <div class="grupo-formulario">
+                    <label for="nacimiento">Fecha de nacimiento:</label>
+                    <input type="date" id="nacimiento" name="nacimiento" required>
+                </div>
+
+                <!-- Color favorito -->
+                <div class="grupo-formulario">
+                    <label for="color">Color favorito:</label>
+                    <input type="color" id="color" name="color" value="#3498db">
+                </div>
+
+                <!-- País con datalist -->
+                <div class="grupo-formulario">
+                    <label for="pais">País:</label>
+                    <input list="paises" id="pais" name="pais" placeholder="Selecciona o escribe tu país" required>
+                    <datalist id="paises">
+                        <option value="Argentina">
+                        <option value="Bolivia">
+                        <option value="Brasil">
+                        <option value="Chile">
+                        <option value="Colombia">
+                        <option value="Ecuador">
+                        <option value="México">
+                        <option value="Paraguay">
+                        <option value="Perú">
+                        <option value="Uruguay">
+                        <option value="Venezuela">
+                    </datalist>
+                </div>
+
+                <button type="submit">Registrarse</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Estructura semántica: Footer -->
+    <footer>
+        <p>&copy; 2026 Registro de Usuario. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Validación de contraseña
+        const formulario = document.getElementById('formRegistro');
+        const contrasena = document.getElementById('contrasena');
+        const errorContrasena = document.getElementById('errorContrasena');
+
+        formulario.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (contrasena.value.length < 8) {
+                errorContrasena.style.display = 'block';
+                return;
+            }
+            
+            errorContrasena.style.display = 'none';
+            alert('¡Registro exitoso!');
+            formulario.reset();
+        });
+
+        // Ocultar error al escribir en la contraseña
+        contrasena.addEventListener('input', function() {
+            if (this.value.length >= 8) {
+                errorContrasena.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+                      </html>
+
